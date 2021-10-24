@@ -5,6 +5,9 @@ import org.junit.Test;
 import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
@@ -27,5 +30,20 @@ public class SpELTest {
     @Data
     class Order {
         private String purchaseName;
+    }
+
+    @Test
+    public void expressTest(){
+        Pattern pattern = Pattern.compile("\\{\\s*(\\w*)\\s*\\{(.*?)}}");
+        String expressionTemplate = "{查询用户{#member.userId}}";
+//        expressionTemplate = "修改了订单的配送员：从“#oldDeliveryUserId”, 修改到“#request.userId”";
+//        expressionTemplate = "{查询用户{#member.userId}}";
+        //
+        //”
+        Matcher matcher = pattern.matcher(expressionTemplate);
+        while (matcher.find()) {
+            String expression = matcher.group(2);
+            System.out.println(expression);
+        }
     }
 }
