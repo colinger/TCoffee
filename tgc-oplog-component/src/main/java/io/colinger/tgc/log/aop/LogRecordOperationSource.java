@@ -4,7 +4,7 @@
 
 package io.colinger.tgc.log.aop;
 
-import io.colinger.tgc.log.annotation.LogRecordAnnotation;
+import io.colinger.tgc.log.annotation.LogRecord;
 import io.colinger.tgc.log.model.LogRecordOps;
 import org.springframework.core.BridgeMethodResolver;
 import org.springframework.core.annotation.AnnotatedElementUtils;
@@ -54,11 +54,11 @@ public class LogRecordOperationSource {
      * @return
      */
     private Collection<LogRecordOps> parseLogRecordAnnotations(AnnotatedElement ae) {
-        Collection<LogRecordAnnotation> logRecordAnnotationAnnotations = AnnotatedElementUtils.getAllMergedAnnotations(ae, LogRecordAnnotation.class);
+        Collection<LogRecord> logRecordAnnotationAnnotations = AnnotatedElementUtils.getAllMergedAnnotations(ae, LogRecord.class);
         Collection<LogRecordOps> ret = null;
         if (!logRecordAnnotationAnnotations.isEmpty()) {
             ret = lazyInit(ret);
-            for (LogRecordAnnotation recordAnnotation : logRecordAnnotationAnnotations) {
+            for (LogRecord recordAnnotation : logRecordAnnotationAnnotations) {
                 ret.add(parseLogRecordAnnotation(ae, recordAnnotation));
             }
         }
@@ -71,7 +71,7 @@ public class LogRecordOperationSource {
      * @param recordAnnotation
      * @return
      */
-    private LogRecordOps parseLogRecordAnnotation(AnnotatedElement ae, LogRecordAnnotation recordAnnotation) {
+    private LogRecordOps parseLogRecordAnnotation(AnnotatedElement ae, LogRecord recordAnnotation) {
         LogRecordOps recordOps = LogRecordOps.builder()
                 .successLogTemplate(recordAnnotation.success())
                 .failLogTemplate(recordAnnotation.fail())

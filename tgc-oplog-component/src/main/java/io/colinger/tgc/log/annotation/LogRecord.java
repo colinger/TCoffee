@@ -18,7 +18,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
-public @interface LogRecordAnnotation {
+public @interface LogRecord {
 
     String success();
 
