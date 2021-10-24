@@ -23,7 +23,5 @@ public class LogRecordOps {
     private String operatorId;
     private String bizKey;
     private String bizNo;
-    private String category;
-    private String detail;
     private String condition;
 }

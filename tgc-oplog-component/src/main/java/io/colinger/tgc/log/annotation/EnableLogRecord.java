@@ -23,7 +23,7 @@ import java.lang.annotation.*;
 public @interface EnableLogRecord {
 
     /**
-     * package
+     * 纯粹标识，没有业务含义
      *
      * @return
      */

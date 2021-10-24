@@ -7,11 +7,11 @@ package io.colinger.tgc.log.aop;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import io.colinger.tgc.log.context.LogRecordContext;
-import io.colinger.tgc.log.service.LogRecordServiceI;
-import io.colinger.tgc.log.parser.LogRecordValueParser;
-import io.colinger.tgc.log.service.OperatorGetServiceI;
 import io.colinger.tgc.log.model.LogRecord;
 import io.colinger.tgc.log.model.LogRecordOps;
+import io.colinger.tgc.log.parser.LogRecordValueParser;
+import io.colinger.tgc.log.service.LogRecordServiceI;
+import io.colinger.tgc.log.service.OperatorGetServiceI;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -144,8 +144,6 @@ public class LogRecordInterceptor extends LogRecordValueParser implements Initia
                             .bizKey(expressionValues.get(operation.getBizKey()))
                             .bizNo(expressionValues.get(operation.getBizNo()))
                             .operator(getRealOperatorId(operation, operatorIdFromService, expressionValues))
-                            .category(operation.getCategory())
-                            .detail(expressionValues.get(operation.getDetail()))
                             .action(expressionValues.get(action))
                             .createTime(new Date())
                             .build();
@@ -172,7 +170,7 @@ public class LogRecordInterceptor extends LogRecordValueParser implements Initia
      * @return
      */
     private List<String> getSpElTemplates(LogRecordOps operation, String action) {
-        List<String> spElTemplates = Lists.newArrayList(operation.getBizKey(), operation.getBizNo(), action, operation.getDetail());
+        List<String> spElTemplates = Lists.newArrayList(operation.getBizKey(), operation.getBizNo(), action);
         if (!StringUtils.isEmpty(operation.getCondition())) {
             spElTemplates.add(operation.getCondition());
         }

@@ -78,8 +78,6 @@ public class LogRecordOperationSource {
                 .bizKey(recordAnnotation.prefix().concat("_").concat(recordAnnotation.bizNo()))
                 .bizNo(recordAnnotation.bizNo())
                 .operatorId(recordAnnotation.operator())
-                .category(StringUtils.isEmpty(recordAnnotation.category()) ? recordAnnotation.prefix() : recordAnnotation.category())
-                .detail(recordAnnotation.detail())
                 .condition(recordAnnotation.condition())
                 .build();
         validateLogRecordOperation(ae, recordOps);
